@@ -3,24 +3,24 @@
     "address": "500 Oxford St",
     "price": 100,
     "description": "Looking to rent out some of the extra space I have in my driveway. I have one car but there is room for one more, available 24/7",
-    "image": "/assets/images/ad1.jpg"
+    "image": "https://securecdn.pymnts.com/wp-content/uploads/2018/03/parkingspot.jpg"
   },
   {
     "address": "214 Huron St",
     "price": 80,
     "description": "I have a parking spot that is open 24/7. Cheap and affordable price. Please call me at 519-234-4321",
-    "image": "../assets/images/ad2.jpg"
+    "image": "https://bongro.ca/wp-content/uploads/2017/08/driveway-interlock-toronto.jpg"
   },
   {
     "address": "99 Adelaide St",
     "price": 70,
     "description": "Cheap parking in a good location",
-    "image": "../assets/images/ad3.jpg"
+    "image": "http://6iee.com/data/uploads/35/346670.jpg"
   },
   {
     "address": "4124 Richmond St",
     "price": 130,
     "description": "Very affordable parking spot right in the heart of downtown",
-    "image": "../assets/images/ad4.jpg"
+    "image": "https://thecrossingscondo.org/wp-content/uploads/cache/remote/www-thecrossingscondo-org/712787384.jpg"
   }
 ]

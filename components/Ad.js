@@ -3,27 +3,26 @@ import { Text, View, StyleSheet, Image } from "react-native";
 
 class ViewAds extends Component {
   render() {
+    console.log(this.props.image);
     return (
       <View style={styles.container}>
-      <View style={styles.titleDiv}>
-        <Text style={styles.address}>{this.props.address}</Text>
-        <Text style={styles.priceDiv}>
-          <Text style={styles.price}>${this.props.price}</Text>
-        </Text>
-      </View>
+        <View style={styles.titleDiv}>
+          <Text style={styles.address}>{this.props.address}</Text>
+          <Text style={styles.priceDiv}>
+            <Text style={styles.price}>${this.props.price}</Text>
+          </Text>
+        </View>
         <View
           style={{
-            borderBottomColor: 'black',
-            borderBottomWidth: 1,
+            borderBottomColor: "black",
+            borderBottomWidth: 1
           }}
         />
 
-        <Text style={styles.description}>
-          {this.props.description}
-        </Text>
+        <Text style={styles.description}>{this.props.description}</Text>
 
         <Image
-          source={require('../assets/images/ad3.jpg')}
+          source={{ uri: this.props.image}}
           style={styles.adImage}
         />
       </View>

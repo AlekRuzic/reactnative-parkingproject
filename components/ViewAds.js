@@ -8,13 +8,13 @@ class ViewAds extends Component {
     return (
       <ScrollView>
       <View style={styles.container}>
-        {Ads.map(function(Ads, i) {
+        {Ads.map(function(ad, i) {
           return (
             <Ad
-              address={Ads.address}
-              price={Ads.price}
-              description={Ads.description}
-              image={require(Ads.image)}
+              address={ad.address}
+              price={ad.price}
+              description={ad.description}
+              image={ad.image}
               key={i}
             />
           );
@@ -24,7 +24,7 @@ class ViewAds extends Component {
           address="testing address"
           price={50}
           description="description"
-          image={require("../assets/images/ad1.jpg")} /> */}
+          image={require('../assets/images/ad1.jpg')} /> */}
       </View>
       </ScrollView>
     )
