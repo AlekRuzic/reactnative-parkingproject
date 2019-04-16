@@ -25,8 +25,28 @@ export default App;
 
 
 const DashboardTabNavigator = createBottomTabNavigator({
-  "View Ads": {screen: ViewAds},
-  "Post Ad": {screen: PostAd}
+  "View Ads": {
+    screen: ViewAds,
+    navigationOptions: () => ({
+      tabBarIcon: ({ tintColor }) => (
+        <Icon
+          name="ios-search"
+          color={tintColor}
+          size={24}
+        />
+      )
+    })},
+  "Post Ad": {screen: PostAd,
+    navigationOptions: () => ({
+      tabBarIcon: ({ tintColor }) => (
+        <Icon
+          name="ios-paper"
+          color={tintColor}
+          size={24}
+        />
+      )
+    })
+  }
 },
 {
   navigationOptions: ({navigation}) => {
@@ -34,8 +54,22 @@ const DashboardTabNavigator = createBottomTabNavigator({
     return {
       headerTitle: "Pin Parking"
     }
-  }
+  },
+},
+  {
+    tabBarComponent: DashboardTabNavigator,
+    tabBarOptions: {
+      showLabel: false,
+      activeTintColor: '#F8F8F8',
+      inactiveTintColor: '#586589',
+      style: {
+        backgroundColor: '#171F33'
+      },
+      tabStyle: {}
+    }
 });
+
+
 
 const DashboardStackNavigator = createStackNavigator({
   DashboardTabNavigator: DashboardTabNavigator
@@ -46,7 +80,7 @@ const DashboardStackNavigator = createStackNavigator({
         <Icon
          name="md-menu"
          size={30}
-         style={{ paddingLeft: 10 }}
+         style={{ paddingLeft: 19 }}
          onPress={() => { navigation.openDrawer()}}/>
       )
     }
@@ -54,13 +88,18 @@ const DashboardStackNavigator = createStackNavigator({
 });
 
 const AppDrawerNavigator = createDrawerNavigator({
-  Account: { screen: DashboardStackNavigator },
+  Menu: { screen: DashboardStackNavigator },
   "Sign Out": { screen: WelcomeScreen }
 });
 
 const AppSwitchNavigator = createSwitchNavigator({
   Welcome: {screen: WelcomeScreen},
-  Dashboard: { screen: AppDrawerNavigator }
+  Dashboard: { screen: AppDrawerNavigator },
+  navigationOptions: () => {
+    style: {
+      backgroundColor: 'blue'
+    }
+  },
 });
 
 const AppContainer = createAppContainer(AppSwitchNavigator);

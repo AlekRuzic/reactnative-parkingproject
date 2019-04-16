@@ -19,12 +19,7 @@ class ViewAds extends Component {
             />
           );
         })}
-
-        {/* <Ad
-          address="testing address"
-          price={50}
-          description="description"
-          image={require('../assets/images/ad1.jpg')} /> */}
+        
       </View>
       </ScrollView>
     )

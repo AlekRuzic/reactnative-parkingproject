@@ -1,9 +1,30 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+
+import { Text, View, StyleSheet, TextInput, TouchableOpacity, Image } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import ImagePicker from "react-native-image-picker";
 
 class PostAd extends Component {
+  state = {
+    photo: null,
+  };
+
+  choosePhoto = () => {
+    const options = {
+      noData: true
+    };
+    ImagePicker.launchImageLibrary(options, (response) => {
+      console.log("response", response);
+      if (response.uri) {
+        this.setState({ photo: response });
+      }
+
+    });
+  };
+
   render() {
+    const { photo } = this.state;
+
     return (
       <View style={styles.container}>
         {/* <Text style={{ textAlign: 'left', marginTop: 30, marginLeft: 40, fontSize: 24}}>Post Ad</Text> */}
@@ -45,7 +66,19 @@ class PostAd extends Component {
               style={styles.inputIcon} />
           </View>
 
-          <Text style={{ marginLeft: 45, color: "#00BFFF"}}>Add Photo</Text>
+          {/* Add Photo Button */}
+          <Text
+            style={{ marginLeft: 45, color: "#00BFFF"}}
+            onPress={this.choosePhoto} >
+          Add Photo</Text>
+
+
+          {/* Uploaded Image */}
+          {photo && (
+          <Image
+            source={{ uri:photo.uri }}
+            style={styles.Image} />
+          )}
 
           {/* Post Ad Button */}
           <View style={styles.buttonsContainer}>
@@ -122,6 +155,12 @@ const styles = StyleSheet.create({
     color: "white",
     fontFamily: "Helvetica Neue",
     fontSize: 17
+  },
+  Image: {
+    height: 100,
+    width: 130,
+    marginTop: 5,
+    marginLeft: 43
   }
 });
 

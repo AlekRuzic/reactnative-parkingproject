@@ -71,5 +71,11 @@
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>$(PinParking) would like access to your photo gallery</string>
+	<key>NSCameraUsageDescription</key>
+	<string>$(PinParking) would like to use your camera</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>$(PinParking) would like to save photos to your photo gallery</string>
 </dict>
 </plist>
