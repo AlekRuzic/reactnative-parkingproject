@@ -22,7 +22,7 @@ class ViewAds extends Component {
         <Text style={styles.description}>{this.props.description}</Text>
 
         <Image
-          source={{ uri: this.props.image}}
+          source={{ uri: 'http://localhost:3000/' + this.props.image}}
           style={styles.adImage}
         />
       </View>

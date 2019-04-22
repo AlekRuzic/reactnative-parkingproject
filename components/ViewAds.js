@@ -4,11 +4,38 @@ import Ad from '../components/Ad';
 import Ads from '../Ads.json';
 
 class ViewAds extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true,
+      ads: []
+    };
+  }
+
+  // Fetch ads
+  componentDidMount() {
+    return fetch('http://localhost:3000')
+      .then((ads) => ads.json())
+      .then((adsJSON) => {
+        console.log(adsJSON);
+        console.log(this.state);
+        this.setState({
+          isLoading: false,
+          ads: adsJSON
+        }, function () {
+        console.log(this.state)
+      })
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   render() {
     return (
       <ScrollView>
       <View style={styles.container}>
-        {Ads.map(function(ad, i) {
+        {this.state.ads.map(function(ad, i) {
           return (
             <Ad
               address={ad.address}
@@ -19,7 +46,6 @@ class ViewAds extends Component {
             />
           );
         })}
-        
       </View>
       </ScrollView>
     )

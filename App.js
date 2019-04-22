@@ -97,7 +97,7 @@ const AppSwitchNavigator = createSwitchNavigator({
   Dashboard: { screen: AppDrawerNavigator },
   navigationOptions: () => {
     style: {
-      backgroundColor: 'blue'
+      backgroundColor: '#F2F2F2'
     }
   },
 });

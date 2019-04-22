@@ -1,12 +1,17 @@
 import React, { Component } from "react";
 
-import { Text, View, StyleSheet, TextInput, TouchableOpacity, Image } from "react-native";
+import { Text, View, StyleSheet, TextInput, TouchableOpacity, Image, Platform } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import ImagePicker from "react-native-image-picker";
 
+import Ads from "../Ads.json";
+
 class PostAd extends Component {
   state = {
-    photo: null,
+    image: "",
+    address: "",
+    description: "",
+    price: "",
   };
 
   choosePhoto = () => {
@@ -16,15 +21,32 @@ class PostAd extends Component {
     ImagePicker.launchImageLibrary(options, (response) => {
       console.log("response", response);
       if (response.uri) {
-        this.setState({ photo: response });
+        this.setState({ image: response });
       }
 
     });
   };
 
   render() {
-    const { photo } = this.state;
+    const { image } = this.state;
 
+
+    const createFormData = (image, body) => {
+      const data = new FormData();
+
+      data.append("image", {
+        name: image.fileName,
+        type: image.type,
+        uri:
+          Platform.OS === "android" ? image.uri : image.uri.replace("file://", "")
+      });
+
+      Object.keys(body).forEach(key => {
+        data.append(key, body[key]);
+      });
+
+      return data;
+    };
     return (
       <View style={styles.container}>
         {/* <Text style={{ textAlign: 'left', marginTop: 30, marginLeft: 40, fontSize: 24}}>Post Ad</Text> */}
@@ -39,6 +61,7 @@ class PostAd extends Component {
             <TextInput
               placeholder={'Address'}
               style={styles.input}
+              onChangeText={(value) => this.setState({ address: value })}
             />
             <Icon name={"ios-home"} size={24} color={'rgba(50, 50, 50, 1)'}
               style={styles.inputIcon} />
@@ -49,6 +72,7 @@ class PostAd extends Component {
             <TextInput
               placeholder={'Price'}
               style={styles.input}
+              onChangeText={(value) => this.setState({ price: value })}
             />
             <Icon name={"logo-usd"} size={24} color={'rgba(50,50,50,1)'}
               style={styles.inputIcon} />
@@ -61,6 +85,7 @@ class PostAd extends Component {
               style={styles.descriptionInput}
               multiline={true}
               numberOfLines={8}
+              onChangeText={(value) => this.setState({ description: value })}
             />
             <Icon name={"ios-information-circle-outline"} size={24} color={'rgba(50,50,50,1)'}
               style={styles.inputIcon} />
@@ -74,9 +99,9 @@ class PostAd extends Component {
 
 
           {/* Uploaded Image */}
-          {photo && (
+          {image!== 0 && (
           <Image
-            source={{ uri:photo.uri }}
+            source={{ uri:image.uri }}
             style={styles.Image} />
           )}
 
@@ -84,7 +109,23 @@ class PostAd extends Component {
           <View style={styles.buttonsContainer}>
             <TouchableOpacity
               style={styles.postAdButton}
-              onPress={() => this.props.navigation.navigate('View Ads')}
+              onPress={() => {
+                fetch("http://localhost:3000/createad", {
+                  method: "POST",
+                  headers: {
+                    Accept: "application/json",
+                    "Content-Type": "multipart/form-data"
+                  },
+                  body: createFormData(image, {
+                      address: this.state.address,
+                      price: this.state.price,
+                      description: this.state.description
+                    })
+                  })
+                  .then(res => console.log(res))
+                  .catch(err => console.log(err));
+                this.props.navigation.navigate('View Ads')}
+              }
             >
               <Text
                 style={styles.buttonText}>Post Ad</Text>
